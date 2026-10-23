@@ -33,6 +33,16 @@ addBookToLibrary('Physics','R D Sharma',490,'not read')
 let container = document.querySelector('.container')
 let booklist = document.querySelector('.books.list')
 
+function infoToPage(value,card,label) {
+    let para = document.createElement('p');
+    let span = document.createElement('span')
+    let span2 = document.createElement('span')
+    span.textContent = label
+    span2.textContent = value
+    card.appendChild(para)
+    para.appendChild(span)
+    para.appendChild(span2)
+}
 
 function addBookToPage() {
     let id, title, author, pages, status;
@@ -46,26 +56,13 @@ function addBookToPage() {
         card.classList.add('card')
         booklist.appendChild(card)
 
-        let para = document.createElement('p');
-        let span = document.createElement('span')
-        let span2 = document.createElement('span')
-        span.textContent = 'Title: '
-        span2.textContent = title
-        card.appendChild(para)
-        para.appendChild(span)
-        para.appendChild(span2)
+        infoToPage(title,card, 'Title: ')
 
-        let para2 = document.createElement('p');
-        para2.textContent=author
-        card.appendChild(para2)
+        infoToPage(author,card,'Author: ')
 
-        let para3 = document.createElement('p');
-        para3.textContent=pages
-        card.appendChild(para3)
-
-        let para4 = document.createElement('p');
-        para4.textContent=status
-        card.appendChild(para4)
+        infoToPage(pages,card,'Pages: ')
+        
+        infoToPage(status,card,'Status: ')
     }
 }
 
