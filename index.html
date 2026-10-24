@@ -21,22 +21,22 @@
         <dialog id="dialog-form">
             <form action="">
 
-                <P>Please add the details as below for you book.</P>
+                <P>Please add the details as below for your book.</P>
                 <fieldset class="form-details">
 
                     <div class="form-row">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" id="title">
+                        <label for="title">Title*</label>
+                        <input type="text" name="title" id="title" required>
                     </div>
                     
                     <div class="form-row">
-                        <label for="author">Author</label>
-                        <input type="text" name="author" id="author">
+                        <label for="author">Author*</label>
+                        <input type="text" name="author" id="author" required>
                     </div>
                     
                     <div class="form-row">
-                        <label for="pages">Pages</label>
-                        <input type="number" name="pages" id="pages">
+                        <label for="pages">Pages*</label>
+                        <input type="number" name="pages" id="pages" required>
                     </div>
                     
                     <div class="form-row">
@@ -47,7 +47,7 @@
                 </fieldset>
                           
                 <div class="action-button">
-                    <button class="create-acc" type="submit">Submit Book</button>
+                    <button class="addBook" type="submit">Submit Book</button>
                 </div>
 
             </form>

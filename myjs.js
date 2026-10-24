@@ -22,12 +22,12 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 
-addBookToLibrary("hamlet","shakespeare",290,'Not read')
-// console.log(myLibrary)
+// addBookToLibrary("hamlet","shakespeare",290,'Not read')
+// // console.log(myLibrary)
 
-addBookToLibrary("Ramayan","valmiki",390,'Read')
+// addBookToLibrary("Ramayan","valmiki",390,'Read')
 
-addBookToLibrary('Physics','R D Sharma',490,'not read')
+// addBookToLibrary('Physics','R D Sharma',490,'not read')
 
 
 let container = document.querySelector('.container')
@@ -66,9 +66,47 @@ function addBookToPage() {
     }
 }
 
-addBookToPage()
+// addBookToPage()
 
-addBookToLibrary('Bond','James bond', 190,'not read')
-// console.log(myLibrary)
+// addBookToLibrary('Bond','James bond', 190,'not read')
+console.log(myLibrary)
 
-addBookToPage()
+// addBookToPage()
+
+
+let checkbox = document.querySelector("input[name='status']")
+let addBook = document.querySelector("button[class='addBook']")
+let bookTitle = document.querySelector("input[name='title']")
+let bookAuthor = document.querySelector("input[name='author']")
+let bookPages = document.querySelector("input[name='pages']")
+const dialog = document.querySelector("dialog");
+const form = document.querySelector("form")
+
+// console.log(checkbox)
+// console.log(checkbox.checked)
+// console.log(addBook)
+// console.log(bookTitle)
+// console.log(bookPages)
+
+// console.log(formDetails.querySelectorAll('input.value'))
+// console.log(form.checkValidity())
+// console.log(form.reportValidity())
+
+addBook.addEventListener('click', (event) => {
+    if(!form.checkValidity()){
+        // alert('Please fill details')
+        // form.reportValidity();
+    }
+    else{
+        event.preventDefault()
+        addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, checkbox.checked)
+        // addBookToLibrary('vande bharat','Modi',20,false)
+        dialog.close()
+        addBookToPage()
+        bookTitle.value=''
+        bookAuthor.value=''
+        bookPages.value=''
+        checkbox.checked=false
+    }
+}
+)
