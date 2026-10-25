@@ -8,10 +8,10 @@ function Book (title, author, pages, read) {
 	this.title = title;
 	this.author = author;
 	this.pages = pages;
-	this.read = read
+	this.read = read;
 	this.info = function(){
 	return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`
-	}
+	};
 }
 
 
@@ -22,27 +22,38 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 
-// addBookToLibrary("hamlet","shakespeare",290,'Not read')
-// // console.log(myLibrary)
+addBookToLibrary("hamlet","shakespeare",290,'Not read')
+// console.log(myLibrary)
 
-// addBookToLibrary("Ramayan","valmiki",390,'Read')
+addBookToLibrary("Ramayan","valmiki",390,'Read')
 
-// addBookToLibrary('Physics','R D Sharma',490,'not read')
+addBookToLibrary('Physics','R D Sharma',490,'not read')
 
 
-let container = document.querySelector('.container')
-let booklist = document.querySelector('.books.list')
+const container = document.querySelector('.container');
+const booklist = document.querySelector('.books.list');
 
 function infoToPage(value,card,label) {
     let para = document.createElement('p');
-    let span = document.createElement('span')
-    let span2 = document.createElement('span')
-    span.textContent = label
-    span2.textContent = value
-    card.appendChild(para)
-    para.appendChild(span)
-    para.appendChild(span2)
+    let span = document.createElement('span');
+    let span2 = document.createElement('span');
+
+    span.textContent = label;
+    span2.textContent = value;
+    card.appendChild(para);
+    para.appendChild(span);
+    para.appendChild(span2);
+
 }
+
+function removeBookFromPage(card,id){
+    let removeButton = document.createElement('button');
+    removeButton.classList.add('remove-book');
+    removeButton.textContent='Remove Book';
+    card.appendChild(removeButton);
+    removeButton.setAttribute('data-bookid',id)
+}
+
 
 function addBookToPage() {
     let id, title, author, pages, status;
@@ -53,60 +64,73 @@ function addBookToPage() {
         // console.log(id,title,author,pages,status)
 
         let card = document.createElement('div')
-        card.classList.add('card')
-        booklist.appendChild(card)
+        card.classList.add('card');
+        card.setAttribute('data-bookid', id)
 
-        infoToPage(title,card, 'Title: ')
+        booklist.appendChild(card);
 
-        infoToPage(author,card,'Author: ')
+        infoToPage(title,card, 'Title: ');
 
-        infoToPage(pages,card,'Pages: ')
+        infoToPage(author,card,'Author: ');
+
+        infoToPage(pages,card,'Pages: ');
         
-        infoToPage(status,card,'Status: ')
+        infoToPage(status,card,'Status: ');
+
+        removeBookFromPage(card,id);
     }
 }
 
-// addBookToPage()
+addBookToPage()
 
-// addBookToLibrary('Bond','James bond', 190,'not read')
-console.log(myLibrary)
+// console.log(myLibrary)
 
-// addBookToPage()
-
-
-let checkbox = document.querySelector("input[name='status']")
-let addBook = document.querySelector("button[class='addBook']")
-let bookTitle = document.querySelector("input[name='title']")
-let bookAuthor = document.querySelector("input[name='author']")
-let bookPages = document.querySelector("input[name='pages']")
 const dialog = document.querySelector("dialog");
-const form = document.querySelector("form")
+const form = document.querySelector("form");
+let checkbox = document.querySelector("input[name='status']");
+let addBook = document.querySelector("button[class='addBook']");
+let bookTitle = document.querySelector("input[name='title']");
+let bookAuthor = document.querySelector("input[name='author']");
+let bookPages = document.querySelector("input[name='pages']");
 
-// console.log(checkbox)
-// console.log(checkbox.checked)
-// console.log(addBook)
-// console.log(bookTitle)
-// console.log(bookPages)
-
-// console.log(formDetails.querySelectorAll('input.value'))
-// console.log(form.checkValidity())
-// console.log(form.reportValidity())
 
 addBook.addEventListener('click', (event) => {
     if(!form.checkValidity()){
-        // alert('Please fill details')
-        // form.reportValidity();
+
     }
     else{
-        event.preventDefault()
-        addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, checkbox.checked)
-        // addBookToLibrary('vande bharat','Modi',20,false)
-        dialog.close()
-        addBookToPage()
-        bookTitle.value=''
-        bookAuthor.value=''
-        bookPages.value=''
-        checkbox.checked=false
+        event.preventDefault();
+        addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, checkbox.checked);
+
+        dialog.close();
+        addBookToPage();
+        bookTitle.value='';
+        bookAuthor.value='';
+        bookPages.value='';
+        checkbox.checked=false;
     }
 }
 )
+
+booklist.addEventListener("click", (event) =>{
+    // console.log(event.target)
+    // console.log(event.target.value)
+    // console.log(event.target.dataset.bookid)
+    // console.log(event.currentTarget)
+    // console.log(event.target.parentElement)
+    // event.target.parentElement.remove()
+
+    if(event.target.classList.contains('remove-book')){
+        // console.log(event.target.dataset.bookid)
+        const id = event.target.dataset.bookid;
+        const index = myLibrary.findIndex( (book) => book.id === id)
+        // console.log(index, id)
+        myLibrary.splice(index,1)
+        console.log(myLibrary)
+        addBookToPage()
+
+    }
+}
+)
+
+
