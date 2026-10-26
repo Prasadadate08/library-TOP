@@ -1,13 +1,164 @@
-body {
-    background-color: bisque;
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Inter:wght@400;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.card{
+body {
+    background-color: lightyellow;
+    font-family: "Inter", sans-serif;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+button, input {
+    font-family: inherit;
+}
+
+.left-bg {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+}
+
+.left-bg h1 {
+    position: absolute;
+    top: 10%;
+    color: white;
+    text-align: center;
+    font-family: "Bungee Inline", sans-serif;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.left-bg p {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    padding: 8px;
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.left-bg a {
+    color: white;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 20px 20px 0;
+}
+
+
+.books.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+button {
+    height: 40px;
+    width: 140px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: white;
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f0f0f0;
+}
+
+.card {
     background-color: white;
     border-radius: 4px;
+    border-left: 6px solid #e0a800;       /* not read */
     box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
-    /* display: flex;
-    gap: 20px; */
-    padding:10px 5px;
-    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.card.read {
+    border-left-color: #2e9e4f;           /* read */
+}
+
+.card > p:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.card > p {
+    padding: 6px 0;
+}
+
+.card > p span:first-child {
+    color: #666;
+    margin-right: 6px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.collection-heading,
+.new-book {
+    display: flex;
+    justify-content: center;
+}
+
+
+dialog {
+    margin: auto;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+dialog form{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+dialog form .form-details{
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"] {
+    padding: 6px;
+}
+
+.action-button {
+    display: flex;
+    justify-content: center;
 }

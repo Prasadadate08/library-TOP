@@ -9,19 +9,31 @@
 </head>
 <body>
     <div class="container">
-        <h1>My Book Library</h1>
-
-        <h2>My book collection</h2>
-        <div class="books list">
-
+        <div class="left-bg">
+            <h1>My Book Library</h1>
+            <img src="assets/emil-widlund-xrbbXIXAWY0-unsplash.jpg" alt="">
+            <p>Photo by <a href="https://unsplash.com/photos/photo-of-brown-wooden-bookshelf-xrbbXIXAWY0">Emil Widlund</a> on <a href="https://unsplash.com">Unsplash</a></p>
         </div>
-        
-        <button command="show-modal" commandfor="dialog-form">New Book</button>
+
+        <div class="right-side">
+            <div class="collection-heading">
+                <h2>Books Collection</h2>
+            </div>
+
+            <div class="new-book">
+                <button command="show-modal" commandfor="dialog-form">New Book</button>
+            </div>
+
+            <div class="books list">
+
+            </div>
+        </div>
+
         
         <dialog id="dialog-form">
             <form action="">
 
-                <P>Please add the details as below for your book.</P>
+                <p>Please add the details as below for your book.</p>
                 <fieldset class="form-details">
 
                     <div class="form-row">

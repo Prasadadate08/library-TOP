@@ -37,19 +37,19 @@ function infoToPage(value,card,label) {
 
 }
 
-function removeBookFromPage(card,id){
+function removeBookFromPage(actions,id){
     let removeButton = document.createElement('button');
     removeButton.classList.add('remove-book');
     removeButton.textContent='Remove Book';
-    card.appendChild(removeButton);
     removeButton.setAttribute('data-bookid',id)
+    actions.appendChild(removeButton);
 }
 
-function readStatusToggle(card){
+function readStatusToggle(actions){
     let readToggle = document.createElement('button');
     readToggle.classList.add('read-status');
-    readToggle.textContent='Read Status'
-    card.appendChild(readToggle)
+    readToggle.textContent='Status Toggle'
+    actions.appendChild(readToggle)
 }
 
 
@@ -63,6 +63,7 @@ function addBookToPage() {
         let card = document.createElement('div')
         card.classList.add('card');
         card.setAttribute('data-bookid', id)
+        card.classList.toggle('read', status);
 
         booklist.appendChild(card);
 
@@ -74,9 +75,13 @@ function addBookToPage() {
         
         infoToPage(status ? 'Read' : 'Not Read',card,'Status: ');
 
-        removeBookFromPage(card,id);
+        let actions = document.createElement('div')
+        actions.classList.add('card-actions');
+        card.appendChild(actions)
 
-        readStatusToggle(card)
+        removeBookFromPage(actions,id);
+
+        readStatusToggle(actions)
     }
 }
 
