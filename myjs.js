@@ -9,11 +9,20 @@ function Book (title, author, pages, read) {
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
-	this.info = function(){
-	return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`
-	};
 }
 
+Book.prototype.toggle = function(){
+    if(this.read === 'Not Read'){
+        this.read = 'Read'
+        // myLibrary[0].read='Read'
+        console.log('this was not read')
+        // console.log(myLibrary[0].read)
+    }
+    else{
+        this.read= 'Not Read'
+        console.log('come into else clause')
+    }
+}
 
 function addBookToLibrary(title, author, pages, read) {
 
@@ -22,12 +31,12 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 
-addBookToLibrary("hamlet","shakespeare",290,'Not read')
+addBookToLibrary("hamlet","shakespeare",290,'Not Read')
 // console.log(myLibrary)
 
 addBookToLibrary("Ramayan","valmiki",390,'Read')
 
-addBookToLibrary('Physics','R D Sharma',490,'not read')
+addBookToLibrary('Physics','R D Sharma',490,'Not Read')
 
 
 const container = document.querySelector('.container');
@@ -54,6 +63,13 @@ function removeBookFromPage(card,id){
     removeButton.setAttribute('data-bookid',id)
 }
 
+function readStatusToggle(card){
+    let readToggle = document.createElement('button');
+    readToggle.classList.add('read-status');
+    readToggle.textContent='Read Status'
+    card.appendChild(readToggle)
+}
+
 
 function addBookToPage() {
     let id, title, author, pages, status;
@@ -78,12 +94,14 @@ function addBookToPage() {
         infoToPage(status,card,'Status: ');
 
         removeBookFromPage(card,id);
+
+        readStatusToggle(card)
     }
 }
 
 addBookToPage()
 
-// console.log(myLibrary)
+console.log(myLibrary)
 
 const dialog = document.querySelector("dialog");
 const form = document.querySelector("form");
@@ -96,11 +114,16 @@ let bookPages = document.querySelector("input[name='pages']");
 
 addBook.addEventListener('click', (event) => {
     if(!form.checkValidity()){
-
     }
     else{
         event.preventDefault();
-        addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, checkbox.checked);
+
+        if(checkbox.checked){
+            addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, 'Read');
+        }
+        else{
+            addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, 'Not Read');
+        }
 
         dialog.close();
         addBookToPage();
@@ -113,24 +136,29 @@ addBook.addEventListener('click', (event) => {
 )
 
 booklist.addEventListener("click", (event) =>{
-    // console.log(event.target)
-    // console.log(event.target.value)
-    // console.log(event.target.dataset.bookid)
-    // console.log(event.currentTarget)
-    // console.log(event.target.parentElement)
-    // event.target.parentElement.remove()
 
     if(event.target.classList.contains('remove-book')){
-        // console.log(event.target.dataset.bookid)
         const id = event.target.dataset.bookid;
-        const index = myLibrary.findIndex( (book) => book.id === id)
-        // console.log(index, id)
-        myLibrary.splice(index,1)
-        console.log(myLibrary)
-        addBookToPage()
+        const index = myLibrary.findIndex( (book) => book.id === id);
+ 
+        myLibrary.splice(index,1);
+        console.log(myLibrary);
+        addBookToPage();
 
+    }
+    else if(event.target.classList.contains('read-status')){
+        console.log('clicked read')
+        console.log(event.target)
+        console.log(event.target.parentElement.dataset.bookid)
+        const id = event.target.parentElement.dataset.bookid;
+        const index = myLibrary.findIndex( (book) => book.id === id);
+
+        console.log(myLibrary[index].toggle())  
+        // myLibrary[index].toggle()
+        // console.log(myLibrary.title)
+        // event.target.toggle();
+        addBookToPage()
     }
 }
 )
-
 
